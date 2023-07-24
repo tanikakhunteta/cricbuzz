@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "426334619060",
+    "project_id": "cricbuzz-23a93",
+    "storage_bucket": "cricbuzz-23a93.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426334619060:android:c70a7a05f49f10d4ae5ee1",
+        "android_client_info": {
+          "package_name": "com.cricbuzz.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426334619060-5rap1oc1bilc8c37ihu7r8r9gr1rfkoh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARj4zY5wKpAEmaIIYLE4fnpJOTDp-M8es"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426334619060-5rap1oc1bilc8c37ihu7r8r9gr1rfkoh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
