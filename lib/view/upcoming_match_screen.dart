@@ -1,5 +1,7 @@
 
 
+import 'dart:developer';
+
 import 'package:cricbuzz/data/network/network_api_services.dart';
 import 'package:cricbuzz/model/match_model.dart';
 
@@ -18,14 +20,14 @@ class UpcomingMatchScreen extends StatefulWidget {
 class _UpcomingMatchScreenState extends State<UpcomingMatchScreen> {
   @override
   void initState() {
-    // NetworkApiServices.getMatchScoreDetails().then((value) {
-     
-    // });
+    NetworkApiServices.getMatchScoreDetails().then((value) {
+     log("$circketScore");
+    });
     
-    // TODO: implement initState
+   
     super.initState();
   }
-  MatchScoreModel? matchScoreModel;
+  CircketScore? circketScore;
 
   @override
   Widget build(BuildContext context) {

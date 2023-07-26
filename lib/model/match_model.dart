@@ -1,14 +1,19 @@
-class MatchScoreModel {
+class CircketScore {
   String? apikey;
-  Data? data;
+  List<Data>? data;
   String? status;
   Info? info;
 
-  MatchScoreModel({this.apikey, this.data, this.status, this.info});
+  CircketScore({this.apikey, this.data, this.status, this.info});
 
-  MatchScoreModel.fromJson(Map<String, dynamic> json) {
+  CircketScore.fromJson(Map<String, dynamic> json) {
     apikey = json['apikey'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(new Data.fromJson(v));
+      });
+    }
     status = json['status'];
     info = json['info'] != null ? new Info.fromJson(json['info']) : null;
   }
@@ -17,7 +22,7 @@ class MatchScoreModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['apikey'] = this.apikey;
     if (this.data != null) {
-      data['data'] = this.data!.toJson();
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
     data['status'] = this.status;
     if (this.info != null) {
@@ -38,9 +43,6 @@ class Data {
   List<String>? teams;
   List<TeamInfo>? teamInfo;
   List<Score>? score;
-  String? tossWinner;
-  String? tossChoice;
-  String? matchWinner;
   String? seriesId;
   bool? fantasyEnabled;
   bool? bbbEnabled;
@@ -59,9 +61,6 @@ class Data {
       this.teams,
       this.teamInfo,
       this.score,
-      this.tossWinner,
-      this.tossChoice,
-      this.matchWinner,
       this.seriesId,
       this.fantasyEnabled,
       this.bbbEnabled,
@@ -90,9 +89,6 @@ class Data {
         score!.add(new Score.fromJson(v));
       });
     }
-    tossWinner = json['tossWinner'];
-    tossChoice = json['tossChoice'];
-    matchWinner = json['matchWinner'];
     seriesId = json['series_id'];
     fantasyEnabled = json['fantasyEnabled'];
     bbbEnabled = json['bbbEnabled'];
@@ -117,9 +113,6 @@ class Data {
     if (this.score != null) {
       data['score'] = this.score!.map((v) => v.toJson()).toList();
     }
-    data['tossWinner'] = this.tossWinner;
-    data['tossChoice'] = this.tossChoice;
-    data['matchWinner'] = this.matchWinner;
     data['series_id'] = this.seriesId;
     data['fantasyEnabled'] = this.fantasyEnabled;
     data['bbbEnabled'] = this.bbbEnabled;
@@ -155,7 +148,7 @@ class TeamInfo {
 class Score {
   int? r;
   int? w;
-  int? o;
+  double? o;
   String? inning;
 
   Score({this.r, this.w, this.o, this.inning});
@@ -183,6 +176,8 @@ class Info {
   int? hitsLimit;
   int? credits;
   int? server;
+  int? offsetRows;
+  int? totalRows;
   double? queryTime;
   int? s;
   int? cache;
@@ -193,6 +188,8 @@ class Info {
       this.hitsLimit,
       this.credits,
       this.server,
+      this.offsetRows,
+      this.totalRows,
       this.queryTime,
       this.s,
       this.cache});
@@ -203,6 +200,8 @@ class Info {
     hitsLimit = json['hitsLimit'];
     credits = json['credits'];
     server = json['server'];
+    offsetRows = json['offsetRows'];
+    totalRows = json['totalRows'];
     queryTime = json['queryTime'];
     s = json['s'];
     cache = json['cache'];
@@ -215,6 +214,8 @@ class Info {
     data['hitsLimit'] = this.hitsLimit;
     data['credits'] = this.credits;
     data['server'] = this.server;
+    data['offsetRows'] = this.offsetRows;
+    data['totalRows'] = this.totalRows;
     data['queryTime'] = this.queryTime;
     data['s'] = this.s;
     data['cache'] = this.cache;
