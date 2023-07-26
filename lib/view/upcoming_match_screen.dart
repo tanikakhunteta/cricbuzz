@@ -19,15 +19,19 @@ class UpcomingMatchScreen extends StatefulWidget {
 
 class _UpcomingMatchScreenState extends State<UpcomingMatchScreen> {
   @override
-  void initState() {
-    NetworkApiServices.getMatchScoreDetails().then((value) {
-     log("$circketScore");
+  void initState()  {
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      NetworkApiServices.getMatchScoreDetails().then((value) {
+        print(value);
+      });
     });
+
     
    
     super.initState();
   }
-  CircketScore? circketScore;
+  CricketResponse? circketScore;
 
   @override
   Widget build(BuildContext context) {

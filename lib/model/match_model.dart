@@ -1,74 +1,75 @@
-class CircketScore {
-  String? apikey;
-  List<Data>? data;
-  String? status;
-  Info? info;
+class CricketResponse {
+  CricketResponse({
+    required this.apikey,
+    required this.data,
+    required this.status,
+    required this.info,
+  });
+  late final String apikey;
+  late final Data data;
+  late final String status;
+  late final Info info;
 
-  CircketScore({this.apikey, this.data, this.status, this.info});
-
-  CircketScore.fromJson(Map<String, dynamic> json) {
+  CricketResponse.fromJson(Map<String, dynamic> json){
     apikey = json['apikey'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
-      });
-    }
+    data = Data.fromJson(json['data']);
     status = json['status'];
-    info = json['info'] != null ? new Info.fromJson(json['info']) : null;
+    info = Info.fromJson(json['info']);
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['apikey'] = this.apikey;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    data['status'] = this.status;
-    if (this.info != null) {
-      data['info'] = this.info!.toJson();
-    }
-    return data;
+    final _data = <String, dynamic>{};
+    _data['apikey'] = apikey;
+    _data['data'] = data.toJson();
+    _data['status'] = status;
+    _data['info'] = info.toJson();
+    return _data;
   }
 }
 
 class Data {
-  String? id;
-  String? name;
-  String? matchType;
-  String? status;
-  String? venue;
-  String? date;
-  String? dateTimeGMT;
-  List<String>? teams;
-  List<TeamInfo>? teamInfo;
-  List<Score>? score;
-  String? seriesId;
-  bool? fantasyEnabled;
-  bool? bbbEnabled;
-  bool? hasSquad;
-  bool? matchStarted;
-  bool? matchEnded;
+  Data({
+    required this.id,
+    required this.name,
+    required this.matchType,
+    required this.status,
+    required this.venue,
+    required this.date,
+    required this.dateTimeGMT,
+    required this.teams,
+    required this.teamInfo,
+    required this.score,
+    required this.tossWinner,
+    required this.tossChoice,
+    required this.matchWinner,
+    required this.seriesId,
+    required this.fantasyEnabled,
+    required this.bbbEnabled,
+    required this.hasSquad,
+    required this.matchStarted,
+    required this.matchEnded,
+  });
+  late final String id;
+  late final String name;
+  late final String matchType;
+  late final String status;
+  late final String venue;
+  late final String date;
+  late final String dateTimeGMT;
+  late final List<String> teams;
+  late final List<TeamInfo> teamInfo;
+  late final List<Score> score;
+  late final String tossWinner;
+  late final String tossChoice;
+  late final String matchWinner;
+  late final String seriesId;
+  late final bool fantasyEnabled;
+  late final bool bbbEnabled;
+  late final bool hasSquad;
+  late final bool matchStarted;
+  late final bool matchEnded;
 
-  Data(
-      {this.id,
-      this.name,
-      this.matchType,
-      this.status,
-      this.venue,
-      this.date,
-      this.dateTimeGMT,
-      this.teams,
-      this.teamInfo,
-      this.score,
-      this.seriesId,
-      this.fantasyEnabled,
-      this.bbbEnabled,
-      this.hasSquad,
-      this.matchStarted,
-      this.matchEnded});
-
-  Data.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json){
     id = json['id'];
     name = json['name'];
     matchType = json['matchType'];
@@ -76,19 +77,12 @@ class Data {
     venue = json['venue'];
     date = json['date'];
     dateTimeGMT = json['dateTimeGMT'];
-    teams = json['teams'].cast<String>();
-    if (json['teamInfo'] != null) {
-      teamInfo = <TeamInfo>[];
-      json['teamInfo'].forEach((v) {
-        teamInfo!.add(new TeamInfo.fromJson(v));
-      });
-    }
-    if (json['score'] != null) {
-      score = <Score>[];
-      json['score'].forEach((v) {
-        score!.add(new Score.fromJson(v));
-      });
-    }
+    teams = List.castFrom<dynamic, String>(json['teams']);
+    teamInfo = List.from(json['teamInfo']).map((e)=>TeamInfo.fromJson(e)).toList();
+    score = List.from(json['score']).map((e)=>Score.fromJson(e)).toList();
+    tossWinner = json['tossWinner'];
+    tossChoice = json['tossChoice'];
+    matchWinner = json['matchWinner'];
     seriesId = json['series_id'];
     fantasyEnabled = json['fantasyEnabled'];
     bbbEnabled = json['bbbEnabled'];
@@ -98,62 +92,68 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['matchType'] = this.matchType;
-    data['status'] = this.status;
-    data['venue'] = this.venue;
-    data['date'] = this.date;
-    data['dateTimeGMT'] = this.dateTimeGMT;
-    data['teams'] = this.teams;
-    if (this.teamInfo != null) {
-      data['teamInfo'] = this.teamInfo!.map((v) => v.toJson()).toList();
-    }
-    if (this.score != null) {
-      data['score'] = this.score!.map((v) => v.toJson()).toList();
-    }
-    data['series_id'] = this.seriesId;
-    data['fantasyEnabled'] = this.fantasyEnabled;
-    data['bbbEnabled'] = this.bbbEnabled;
-    data['hasSquad'] = this.hasSquad;
-    data['matchStarted'] = this.matchStarted;
-    data['matchEnded'] = this.matchEnded;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['id'] = id;
+    _data['name'] = name;
+    _data['matchType'] = matchType;
+    _data['status'] = status;
+    _data['venue'] = venue;
+    _data['date'] = date;
+    _data['dateTimeGMT'] = dateTimeGMT;
+    _data['teams'] = teams;
+    _data['teamInfo'] = teamInfo.map((e)=>e.toJson()).toList();
+    _data['score'] = score.map((e)=>e.toJson()).toList();
+    _data['tossWinner'] = tossWinner;
+    _data['tossChoice'] = tossChoice;
+    _data['matchWinner'] = matchWinner;
+    _data['series_id'] = seriesId;
+    _data['fantasyEnabled'] = fantasyEnabled;
+    _data['bbbEnabled'] = bbbEnabled;
+    _data['hasSquad'] = hasSquad;
+    _data['matchStarted'] = matchStarted;
+    _data['matchEnded'] = matchEnded;
+    return _data;
   }
 }
 
 class TeamInfo {
-  String? name;
-  String? shortname;
-  String? img;
+  TeamInfo({
+    required this.name,
+    required this.shortname,
+    required this.img,
+  });
+  late final String name;
+  late final String shortname;
+  late final String img;
 
-  TeamInfo({this.name, this.shortname, this.img});
-
-  TeamInfo.fromJson(Map<String, dynamic> json) {
+  TeamInfo.fromJson(Map<String, dynamic> json){
     name = json['name'];
     shortname = json['shortname'];
     img = json['img'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['shortname'] = this.shortname;
-    data['img'] = this.img;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['name'] = name;
+    _data['shortname'] = shortname;
+    _data['img'] = img;
+    return _data;
   }
 }
 
 class Score {
-  int? r;
-  int? w;
-  double? o;
-  String? inning;
+  Score({
+    required this.r,
+    required this.w,
+    required this.o,
+    required this.inning,
+  });
+  late final int r;
+  late final int w;
+  late final int o;
+  late final String inning;
 
-  Score({this.r, this.w, this.o, this.inning});
-
-  Score.fromJson(Map<String, dynamic> json) {
+  Score.fromJson(Map<String, dynamic> json){
     r = json['r'];
     w = json['w'];
     o = json['o'];
@@ -161,64 +161,56 @@ class Score {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['r'] = this.r;
-    data['w'] = this.w;
-    data['o'] = this.o;
-    data['inning'] = this.inning;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['r'] = r;
+    _data['w'] = w;
+    _data['o'] = o;
+    _data['inning'] = inning;
+    return _data;
   }
 }
 
 class Info {
-  int? hitsToday;
-  int? hitsUsed;
-  int? hitsLimit;
-  int? credits;
-  int? server;
-  int? offsetRows;
-  int? totalRows;
-  double? queryTime;
-  int? s;
-  int? cache;
+  Info({
+    required this.hitsToday,
+    required this.hitsUsed,
+    required this.hitsLimit,
+    required this.credits,
+    required this.server,
+    required this.queryTime,
+    required this.s,
+    required this.cache,
+  });
+  late final int hitsToday;
+  late final int hitsUsed;
+  late final int hitsLimit;
+  late final int credits;
+  late final int server;
+  late final double queryTime;
+  late final int s;
+  late final int cache;
 
-  Info(
-      {this.hitsToday,
-      this.hitsUsed,
-      this.hitsLimit,
-      this.credits,
-      this.server,
-      this.offsetRows,
-      this.totalRows,
-      this.queryTime,
-      this.s,
-      this.cache});
-
-  Info.fromJson(Map<String, dynamic> json) {
+  Info.fromJson(Map<String, dynamic> json){
     hitsToday = json['hitsToday'];
     hitsUsed = json['hitsUsed'];
     hitsLimit = json['hitsLimit'];
     credits = json['credits'];
     server = json['server'];
-    offsetRows = json['offsetRows'];
-    totalRows = json['totalRows'];
     queryTime = json['queryTime'];
     s = json['s'];
     cache = json['cache'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['hitsToday'] = this.hitsToday;
-    data['hitsUsed'] = this.hitsUsed;
-    data['hitsLimit'] = this.hitsLimit;
-    data['credits'] = this.credits;
-    data['server'] = this.server;
-    data['offsetRows'] = this.offsetRows;
-    data['totalRows'] = this.totalRows;
-    data['queryTime'] = this.queryTime;
-    data['s'] = this.s;
-    data['cache'] = this.cache;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['hitsToday'] = hitsToday;
+    _data['hitsUsed'] = hitsUsed;
+    _data['hitsLimit'] = hitsLimit;
+    _data['credits'] = credits;
+    _data['server'] = server;
+    _data['queryTime'] = queryTime;
+    _data['s'] = s;
+    _data['cache'] = cache;
+    return _data;
   }
 }
